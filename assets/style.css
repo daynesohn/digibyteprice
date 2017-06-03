@@ -1,0 +1,75 @@
+/*logo font - font-family: 'Raleway', sans-serif;*/
+/*body font - font-family: 'Lato', sans-serif;*/
+/*
+  brand colors
+  #99a1aa
+  #ffffff
+  #f4d35e
+  #da4167
+  #0d60ba
+*/
+html {
+  font-size: 16px;
+}
+
+body{
+    background-color: #333;
+    font-family: 'Lato', sans-serif;
+    color: #fff;
+}
+
+h1 {
+  font-size: 7rem;
+}
+
+.navbar {
+  background-color: #333;
+  border-bottom: 0.25rem solid white;
+}
+
+.navbar-left,
+.navbar-left a {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2.75rem;
+  margin-left: 2rem;
+  color: #fff;
+  transition: color 1.2s;
+  text-decoration: none;
+}
+
+.navbar-left a:hover {
+  color: #34495e;
+  text-decoration: none;
+}
+
+.top-container {
+  margin-top: 4.375rem;
+}
+
+/*stats styling*/
+.current-price {;
+  font-size: 4.25rem;
+  font-weight: 900;
+  margin-top: 1rem;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.875rem;
+}
+
+/*footer styles*/
+.footer {
+  width: 100%;
+  margin: 0 auto;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer a,
+.footer a:hover {
+  text-decoration: none;
+  color: #fff;
+}
