@@ -38,7 +38,7 @@ body{
 }
 
 .navbar-left a:hover {
-  color: #34495e;
+  color: #f4d35e;
   text-decoration: none;
 }
 
@@ -56,7 +56,15 @@ body{
 .stats {
   display: flex;
   justify-content: space-around;
-  font-size: 1.875rem;
+  font-size: 1.5rem;
+}
+
+.green {
+  color: #2E7D32;
+}
+
+.red {
+  color: #C62828;
 }
 
 /*footer styles*/
