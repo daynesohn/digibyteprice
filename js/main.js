@@ -24,6 +24,11 @@ digiByte.renderCoin = function(response) {
   $showRank.empty().append(htmlRank);
 }
 
+digiByte.renderPolo = function(response) {
+
+  
+}
+
 var getCoin = function() {
   $.ajax({
     url: 'https://api.coinmarketcap.com/v1/ticker/digibyte/?convert=USD',
