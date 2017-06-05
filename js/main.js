@@ -151,11 +151,11 @@ var getPolo = function() {
 };
 
 $(document).ready(function() {
-  //getCoin();
+  getCoin();
   getPolo();
   //refresh data every 60 seconds
   setInterval(function() {
-    //getCoin();
+    getCoin();
     getPolo();
   }, 60000);
 });
