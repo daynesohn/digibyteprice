@@ -82,6 +82,7 @@ function drawLineChart(response) {
           pointBackgroundColor : "#99a1aa",
           pointHighlightFill : "#fff",
           pointRadius : 6.75,
+          pointHoverRadius: 8,
           data : data
       }]
     };
@@ -108,13 +109,14 @@ function drawLineChart(response) {
             paddingTop: 20
           },
           ticks: {
-            fontColor: 'white'
+            fontColor: 'white',
+            fixedStepSize: 0.01
           }
         }],
         xAxes: [{
           scaleLabel: {
             display: true,
-            labelString: 'Time/Date',
+            labelString: 'Date',
             fontColor: 'white'
           },
           ticks: {
