@@ -1,6 +1,7 @@
 var digiByte = {};
 var response;
 
+//getting current date and date 35 days ago for use in chart.js
 const dateTime = Date.now();
 const currentDate = Math.floor(dateTime / 1000);
 const startDate = currentDate - 3024000;
@@ -39,8 +40,6 @@ digiByte.renderPolo = function(response) {
   $lowestPrice.empty().hide().append(htmlLowPrice).fadeIn(1000);
   $highestPrice.empty().hide().append(htmlHighPrice).fadeIn(1000);
 
-
-
   var currentPrice = (response.BTC_DGB.last) * (response.USDT_BTC.last);
   var $showPrice = $('#dollar');
   var htmlPrice = '<span>$' + currentPrice.toFixed(7) + '</span>';
@@ -50,13 +49,6 @@ digiByte.renderPolo = function(response) {
 
 //chart.js implementation
 function drawLineChart(response) {
-
-  // Add a helper to format timestamp data
-  Date.prototype.formatMMDDYYYY = function() {
-      return (this.getMonth() + 1) +
-      "/" +  this.getDate() +
-      "/" +  this.getFullYear();
-  }
 
   var jsonData = $.ajax({
     url: 'https://poloniex.com/public?command=returnChartData&currencyPair=BTC_DGB&start=' + startDate + '&end=' + currentDate + '&period=86400',
@@ -125,7 +117,7 @@ function drawLineChart(response) {
           }
         }]
       }
-}
+    }
     });
   });
 }
