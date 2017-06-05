@@ -50,6 +50,8 @@ digiByte.renderPolo = function(response) {
 //chart.js implementation
 function drawLineChart(response) {
 
+  var curBitcoin = response.USDT_BTC.last;
+
   var jsonData = $.ajax({
     url: 'https://poloniex.com/public?command=returnChartData&currencyPair=BTC_DGB&start=' + startDate + '&end=' + currentDate + '&period=86400',
     dataType: 'json',
@@ -63,7 +65,10 @@ function drawLineChart(response) {
       labels.push(calDateRead);
     }
     for (var dataCount=0; dataCount<35; dataCount++) {
-      data.push(((results[dataCount].open)+(results[dataCount].close)/2)*(response.USDT_BTC.last))
+      var digiOpen = results[dataCount].open,
+          digiClose = results[dataCount].close;
+
+      data.push(((digiOpen + digiClose)/2) * curBitcoin)
     }
 
     // Create the chart.js data structure using 'labels' and 'data'
@@ -145,11 +150,12 @@ var getPolo = function() {
   })
 };
 
-$(document).ready(getCoin);
-$(document).ready(getPolo);
-$( '#myLineChart' ).on( "load", drawLineChart)
-
-//refresh data every 60 seconds
-setInterval(getCoin, 60000);
-setInterval(getPolo, 60000);
-setInterval(drawLineChart, 60000);
+$(document).ready(function() {
+  //getCoin();
+  getPolo();
+  //refresh data every 60 seconds
+  setInterval(function() {
+    //getCoin();
+    getPolo();
+  }, 60000);
+});
