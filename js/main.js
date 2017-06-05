@@ -2,31 +2,45 @@ var digiByte = {};
 
 digiByte.renderCoin = function(response) {
 
-  var currentPrice = response[0].price_usd;
-  var $showPrice = $('#dollar');
-  var htmlPrice = '<span>$' + currentPrice + '</span>';
-
   var coinRank = response[0].rank;
   var $showRank = $('#coin-rank');
-  var htmlRank = '<span>Coin Rank: ' + coinRank + '</span>';
+  var htmlRank = '<span>' + coinRank + '</span>';
 
-  //percentage change - adding if statement for green if positive, red if negative
+  //percentage change - adding if/else statement for green if positive, red if negative
   var percentChange = response[0].percent_change_24h;
   var $showPerChange = $('#percent-change');
     if (percentChange >= 0) {
-    var htmlPerChange = '<span class="green">+' + percentChange + '% over 24h</span>';
+    var htmlPerChange = '<span class="green">+' + percentChange + '% in last 24h</span>';
   } else {
-    var htmlPerChange = '<span class="red">' + percentChange + '% over 24h</span>';
+    var htmlPerChange = '<span class="red">' + percentChange + '% in last 24h</span>';
   };
 
-  $showPrice.empty().append(htmlPrice);
-  $showPerChange.empty().append(htmlPerChange);
-  $showRank.empty().append(htmlRank);
+  $showPerChange.empty().hide().append(htmlPerChange).fadeIn(1000);
+  $showRank.empty().hide().append(htmlRank).fadeIn(1000);
+
 }
 
 digiByte.renderPolo = function(response) {
 
-  
+  //need to convert lowest price on Poloniex from BTC to USD
+  var lowestPrice = (response.BTC_DGB.low24hr) * (response.USDT_BTC.last);
+  var $lowestPrice = $('#low-price');
+  var htmlLowPrice = '<span>$' + lowestPrice.toFixed(6) + '</span>';
+
+  var highestPrice = (response.BTC_DGB.high24hr) * (response.USDT_BTC.last);
+  var $highestPrice = $('#high-price');
+  var htmlHighPrice = '<span>$' + highestPrice.toFixed(6) + '<span>';
+
+  $lowestPrice.empty().hide().append(htmlLowPrice).fadeIn(1000);
+  $highestPrice.empty().hide().append(htmlHighPrice).fadeIn(1000);
+
+
+
+  var currentPrice = (response.BTC_DGB.last) * (response.USDT_BTC.last);
+  var $showPrice = $('#dollar');
+  var htmlPrice = '<span>$' + currentPrice.toFixed(7) + '</span>';
+  $showPrice.empty().append(htmlPrice);
+
 }
 
 var getCoin = function() {
@@ -50,6 +64,8 @@ var getPolo = function() {
 };
 
 $(document).ready(getCoin);
-//$(document).ready(getPolo)
+$(document).ready(getPolo)
 
-/*setInterval(getPrices, 60000);*/
+//refresh data every 60 seconds
+//setInterval(getCoin, 60000);
+//setInterval(getPolo, 60000);
