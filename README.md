@@ -2,7 +2,7 @@
 # DIGIPRICE
 Recently got into DGB and wanted to make a website to monitor the price in USD easily.
 
-Idea from ethereumprice.org
+Idea from [ethereumprice.org](ethereumprice.org)
 
 Utilizing two different APIs:
 * [CoinMarketCap](http://cointmarketcap.com)
