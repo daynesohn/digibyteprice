@@ -22,16 +22,41 @@
     <div class="container-fluid text-center add-pad">
       <div class="row">
         <div class="row col-md-12 text-center stats">
-          <div id="percent-change">
+          <div class="stat">
+            <div class="stat-title">
+              <span>Percent Change</span>
+            </div>
+            <div id="percent-change">
+            </div>
           </div>
-          <div id="coin-rank">
+          <div class="stat">
+            <div class="stat-title">
+              <span>Coin Rank</span>
+            </div>
+            <div id="coin-rank">
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-title">
+              <span>Lowest Price</span>
+            </div>
+            <div id="low-price">
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-title">
+              <span>Highest Price</span>
+            </div>
+            <div id="high-price">
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="container-fluid text-center add-pad">
       <div class="row col-md-12 text-center">
-        CHART
+        C H A R T
+        <!--<canvas id="myChart" width="100" height="100"></canvas>-->
       </div>
     </div>
     <div class="container-fluid text-center footer add-pad">
@@ -43,7 +68,7 @@
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
     <script src="./js/main.js"></script>
   </body>
 </html>
