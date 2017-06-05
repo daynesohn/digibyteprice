@@ -1,6 +1,10 @@
 var digiByte = {};
 var response;
 
+const dateTime = Date.now();
+const currentDate = Math.floor(dateTime / 1000);
+const startDate = currentDate - 3024000;
+
 digiByte.renderCoin = function(response) {
 
   var coinRank = response[0].rank;
@@ -55,14 +59,16 @@ function drawLineChart(response) {
   }
 
   var jsonData = $.ajax({
-    url: 'https://poloniex.com/public?command=returnChartData&currencyPair=BTC_DGB&start=1405699200&end=9999999999&period=14400',
+    url: 'https://poloniex.com/public?command=returnChartData&currencyPair=BTC_DGB&start=' + startDate + '&end=' + currentDate + '&period=86400',
     dataType: 'json',
   }).done(function (results) {
     // Split timestamp and data into separate arrays
     var labels = [], data=[];
 
     for (var labelCount=0; labelCount<35; labelCount++) {
-      labels.push(results[labelCount].date)
+      var calDate = moment.unix(results[labelCount].date);
+      var calDateRead = calDate.format("MMM Do YYYY");
+      labels.push(calDateRead);
     }
     for (var dataCount=0; dataCount<35; dataCount++) {
       data.push(((results[dataCount].open)+(results[dataCount].close)/2)*(response.USDT_BTC.last))
@@ -90,6 +96,36 @@ function drawLineChart(response) {
     var myNewChart = new Chart(ctx , {
     type: "line",
     data: tempData,
+    options : {
+      legend: {
+        labels: {
+          fontColor: 'white'
+        }
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Price in USD',
+            fontColor: 'white',
+            paddingTop: 20
+          },
+          ticks: {
+            fontColor: 'white'
+          }
+        }],
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Time/Date',
+            fontColor: 'white'
+          },
+          ticks: {
+            fontColor: 'white'
+          }
+        }]
+      }
+}
     });
   });
 }
@@ -117,11 +153,11 @@ var getPolo = function() {
   })
 };
 
-//$(document).ready(getCoin);
+$(document).ready(getCoin);
 $(document).ready(getPolo);
-$(window).load(drawLineChart);
+$( '#myLineChart' ).on( "load", drawLineChart)
 
 //refresh data every 60 seconds
-//setInterval(getCoin, 60000);
-//setInterval(getPolo, 60000);
-//setInterval(drawLineChart, 60000);
+setInterval(getCoin, 60000);
+setInterval(getPolo, 60000);
+setInterval(drawLineChart, 60000);
