@@ -142,6 +142,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   font-size: 1.5rem;
+  align-items: center
 }
 
 /*footer styles*/
@@ -163,9 +164,63 @@ a:hover {
 }
 
 .copyright {
-  text-align: left
+  text-align: left;
+  margin-left: 1rem;
 }
 
 .api-credit {
-  text-align: right
+  text-align: right;
+  margin-right: 1rem;
+}
+
+/*responsive styles*/
+@media only screen and (max-width: 1000px) {
+  .current-price {
+    font-size: 3.5rem;
+  }
+}
+
+@media only screen and (max-width: 767px ) {
+  .navbar-fixed-top {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .navbar-left a,
+  .navbar-right,
+  .navbar,
+  .top-container {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .about-title {
+    font-size: 3.5rem;
+    text-align: center;
+  }
+
+  .stats {
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .add-pad {
+    margin: 0;
+  }
+
+  .col-xs-6 {
+    margin: 1.5rem 0;
+  }
+
+  .footer {
+    margin: 2rem 0;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
 }

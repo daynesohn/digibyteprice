@@ -1,10 +1,10 @@
 var digiByte = {};
 var response;
 
-//getting current date and date 35 days ago for use in chart.js
+//getting current date and date 21 days ago for use in chart.js
 const dateTime = Date.now();
 const currentDate = Math.floor(dateTime / 1000);
-const startDate = currentDate - 3024000;
+const startDate = currentDate - 1814400;
 
 digiByte.renderCoin = function(response) {
 
@@ -56,19 +56,66 @@ function drawLineChart(response) {
     url: 'https://poloniex.com/public?command=returnChartData&currencyPair=BTC_DGB&start=' + startDate + '&end=' + currentDate + '&period=86400',
     dataType: 'json',
   }).done(function (results) {
-    // Split timestamp and data into separate arrays
+    // split timestamp and data into separate arrays
     var labels = [], data=[];
 
-    for (var labelCount=0; labelCount<35; labelCount++) {
-      var calDate = moment.unix(results[labelCount].date);
-      var calDateRead = calDate.format("MMM Do YYYY");
-      labels.push(calDateRead);
-    }
-    for (var dataCount=0; dataCount<35; dataCount++) {
-      var digiOpen = results[dataCount].open,
-          digiClose = results[dataCount].close;
-
-      data.push(((digiOpen + digiClose)/2) * curBitcoin)
+    //if screen size under 900px, show 14 days data
+    if(window.innerWidth < 900 && window.innerWidth > 800) {
+      var $chartTitle = $('.chart-title'),
+          htmlChartTitle = '<span class="chart-title">DigiByte price in USD over the last 14 days</span>';
+      $chartTitle.empty().append(htmlChartTitle);
+      results.reverse()
+      for (var labelCount=0; labelCount<14; labelCount++) {
+        var calDate = moment.unix(results[labelCount].date);
+        var calDateRead = calDate.format("MMM Do YYYY");
+        labels.push(calDateRead);
+      } labels.reverse();
+      for (var dataCount=0; dataCount<14; dataCount++) {
+        var digiOpen = results[dataCount].open,
+            digiClose = results[dataCount].close;
+            data.push(((digiOpen + digiClose)/2) * curBitcoin);
+      } data.reverse();
+    } else if(window.innerWidth <= 800 && window.innerWidth > 600) {
+      var $chartTitle = $('.chart-title'),
+          htmlChartTitle = '<span class="chart-title">DigiByte price in USD over the last 7 days</span>';
+      $chartTitle.empty().append(htmlChartTitle);
+      results.reverse()
+      for (var labelCount=0; labelCount<7; labelCount++) {
+        var calDate = moment.unix(results[labelCount].date);
+        var calDateRead = calDate.format("MMM Do YYYY");
+        labels.push(calDateRead);
+      } labels.reverse();
+      for (var dataCount=0; dataCount<7; dataCount++) {
+        var digiOpen = results[dataCount].open,
+            digiClose = results[dataCount].close;
+            data.push(((digiOpen + digiClose)/2) * curBitcoin);
+      } data.reverse();
+    } else if(window.innerWidth <= 600) {
+      var $chartTitle = $('.chart-title'),
+          htmlChartTitle = '<span class="chart-title">DigiByte price in USD over the last 5 days</span>';
+      $chartTitle.empty().append(htmlChartTitle);
+      results.reverse()
+      for (var labelCount=0; labelCount<5; labelCount++) {
+        var calDate = moment.unix(results[labelCount].date);
+        var calDateRead = calDate.format("MMM Do YYYY");
+        labels.push(calDateRead);
+      } labels.reverse();
+      for (var dataCount=0; dataCount<5; dataCount++) {
+        var digiOpen = results[dataCount].open,
+            digiClose = results[dataCount].close;
+            data.push(((digiOpen + digiClose)/2) * curBitcoin);
+      } data.reverse();
+    } else {
+      for (var labelCount=0; labelCount<21; labelCount++) {
+        var calDate = moment.unix(results[labelCount].date);
+        var calDateRead = calDate.format("MMM Do YYYY");
+        labels.push(calDateRead);
+      }
+      for (var dataCount=0; dataCount<21; dataCount++) {
+        var digiOpen = results[dataCount].open,
+            digiClose = results[dataCount].close;
+            data.push(((digiOpen + digiClose)/2) * curBitcoin)
+      }
     }
 
     // Create the chart.js data structure using 'labels' and 'data'
@@ -161,3 +208,5 @@ $(document).ready(function() {
     getPolo();
   }, 60000);
 });
+
+console.log($(window).width);
