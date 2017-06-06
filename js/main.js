@@ -134,6 +134,10 @@ function drawLineChart(response) {
       },
       responsive: true,
       maintainAspectRatio: true,
+      animation: {
+        duration: 1000,
+        easing: 'easeInExpo'
+      },
       scales: {
         yAxes: [{
           scaleLabel: {
