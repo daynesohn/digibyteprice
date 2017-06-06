@@ -75,7 +75,7 @@ function drawLineChart(response) {
             digiClose = results[dataCount].close;
             data.push(((digiOpen + digiClose)/2) * curBitcoin);
       } data.reverse();
-    } else if((window.screen.width <= 800 && window.screen.width > 620) || (window.innerWidth <=800 && window.innerWidth > 620)) {
+    } else if((window.screen.width <= 800) || (window.innerWidth <=800)) {
       var $chartTitle = $('.chart-title'),
           htmlChartTitle = '<span class="chart-title">DigiByte price in USD over the last 7 days</span>';
       $chartTitle.empty().append(htmlChartTitle);
@@ -86,21 +86,6 @@ function drawLineChart(response) {
         labels.push(calDateRead);
       } labels.reverse();
       for (var dataCount=0; dataCount<7; dataCount++) {
-        var digiOpen = results[dataCount].open,
-            digiClose = results[dataCount].close;
-            data.push(((digiOpen + digiClose)/2) * curBitcoin);
-      } data.reverse();
-    } else if(window.screen.width <= 620 || window.innerWidth <= 620) {
-      var $chartTitle = $('.chart-title'),
-          htmlChartTitle = '<span class="chart-title">DigiByte price in USD over the last 5 days</span>';
-      $chartTitle.empty().append(htmlChartTitle);
-      results.reverse()
-      for (var labelCount=0; labelCount<5; labelCount++) {
-        var calDate = moment.unix(results[labelCount].date),
-            calDateRead = calDate.format("MMM Do YYYY");
-        labels.push(calDateRead);
-      } labels.reverse();
-      for (var dataCount=0; dataCount<5; dataCount++) {
         var digiOpen = results[dataCount].open,
             digiClose = results[dataCount].close;
             data.push(((digiOpen + digiClose)/2) * curBitcoin);
@@ -147,6 +132,8 @@ function drawLineChart(response) {
           fontColor: 'white'
         }
       },
+      responsive: true,
+      maintainAspectRatio: true,
       scales: {
         yAxes: [{
           scaleLabel: {
@@ -199,12 +186,25 @@ var getPolo = function() {
   })
 };
 
+var getViewport = function() {
+  if((window.screen.width === 375) && (window.screen.height === 667)) {
+    console.log('success');
+    var $chartDiv = $('.chart-replace'),
+        htmlChartDiv = '<canvas id="myLineChart"></canvas>';
+    $chartDiv.empty().append(htmlChartDiv);
+  }
+  getPolo();
+}
+
 $(document).ready(function() {
   getCoin();
-  getPolo();
+  getViewport();
   //refresh data every 60 seconds
   setInterval(function() {
     getCoin();
     getPolo();
   }, 60000);
 });
+
+console.log(window.screen.width);
+console.log(window.screen.height);
