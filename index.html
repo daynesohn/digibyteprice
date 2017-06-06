@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>DigiPrice</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="./css/reset.css" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Raleway:900|Lato:400,900" rel="stylesheet">
@@ -12,6 +14,12 @@
     <nav class="nav navbar navbar-fixed-top">
       <div class="nav navbar-left">
         <span class="title" id="click-me"><a href="#">DIGIPRICE</a></span>
+      </div>
+      <div class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav nav-pills links">
+          <li><a href="./about.html">About</a></li>
+          <li><a href="mailto:dayne@daynesohn.com">Contact</a></li>
+        </ul>
       </div>
     </nav>
     <div class="container-fluid top-container">
@@ -54,17 +62,17 @@
       </div>
     </div>
     <div class="container-fluid text-center add-pad">
-      <div class="row col-md-12 text-center">
-        C H A R T
+      <div class="row col-md-12 text-center chart-section">
+        <span>DigiByte price in USD over the last 35 days</span>
         <canvas id="myLineChart" width="740" height="200"></canvas>
       </div>
     </div>
     <div class="container-fluid text-center footer add-pad">
       <div class="copyright col-md-6">
-        <span>&copy;2017 Dayne Sohn</span>
+        <span>&copy;2017 <a href="http://daynesohn.com" target="_blank">Dayne Sohn</a></span>
       </div>
       <div class="api-credit col-md-6">
-        <span>Data from the <a href="https://poloniex.com/exchange#btc_dgb">Poloniex</a> and <a href="https://coinmarketcap.com/">CoinMarketCap</a> APIs</span>
+        <span>Data from the <a href="https://poloniex.com/exchange#btc_dgb" target="_blank">Poloniex</a> and <a href="https://coinmarketcap.com/" target="_blank">CoinMarketCap</a> APIs</span>
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
