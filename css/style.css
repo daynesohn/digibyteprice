@@ -19,6 +19,16 @@ body{
     color: #fff;
 }
 
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #f4d35e;
+  text-decoration: none;
+}
+
 .add-pad {
   margin: 4rem 0;
 }
@@ -34,7 +44,7 @@ body{
   font-size: 2.75rem;
   margin-left: 2rem;
   color: #333;
-  transition: color 1.2s;
+  transition: color 0.75s;
   text-decoration: none;
 }
 
@@ -44,7 +54,7 @@ body{
 }
 
 .navbar-right {
-  margin: 0;
+  margin: 0 1rem 0 0;
   height: 100%;
   display: flex;
 }
@@ -57,6 +67,12 @@ body{
   color: #f4d35e;
 }
 
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:hover {
+  background-color: #f4d35e;
+  color: #333;
+}
+
 .links {
   display: flex;
   margin: 0.4rem;
@@ -67,10 +83,35 @@ body{
 }
 
 /*stats styling*/
-.current-price {;
+.current-price,
+.about-title {;
   font-size: 4.25rem;
   font-weight: 900;
   margin-top: 1rem;
+}
+
+.about-container {
+  max-width: 55rem;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-title {
+  color: #f4d35e;
+}
+
+.about-text {
+  max-width: 38rem;
+  text-align: justify;
+}
+
+.about-text-left {
+  max-width: 38rem;
+  text-align: left;
 }
 
 .stats {
@@ -114,17 +155,11 @@ body{
   left: 0;
   bottom: 0;
   height: 40px;
-  width: 100%;
 }
 
-.footer a {
-  text-decoration: none;
-  color: #fff;
-}
-
-.footer a:hover {
-  text-decoration: none;
-  color: #f4d35e;
+.f-a {
+  position: relative;
+  margin-top: 5rem;
 }
 
 .copyright {
