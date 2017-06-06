@@ -60,7 +60,7 @@ function drawLineChart(response) {
     var labels = [], data=[];
 
     //if screen size under 900px, show 14 days data
-    if(window.innerWidth < 900 && window.innerWidth > 800) {
+    if((screen.innerWidth < 900 && screen.innerWidth > 800) || (window.innerWidth < 900 && window.innerWidth > 800)) {
       var $chartTitle = $('.chart-title'),
           htmlChartTitle = '<span class="chart-title">DigiByte price in USD over the last 14 days</span>';
       $chartTitle.empty().append(htmlChartTitle);
@@ -75,7 +75,7 @@ function drawLineChart(response) {
             digiClose = results[dataCount].close;
             data.push(((digiOpen + digiClose)/2) * curBitcoin);
       } data.reverse();
-    } else if(window.innerWidth <= 800 && window.innerWidth > 600) {
+    } else if((screen.innerWidth <= 800 && screen.innerWidth > 600) || (window.innerWidth <= 800 && window.innerWidth > 600)) {
       var $chartTitle = $('.chart-title'),
           htmlChartTitle = '<span class="chart-title">DigiByte price in USD over the last 7 days</span>';
       $chartTitle.empty().append(htmlChartTitle);
@@ -90,7 +90,7 @@ function drawLineChart(response) {
             digiClose = results[dataCount].close;
             data.push(((digiOpen + digiClose)/2) * curBitcoin);
       } data.reverse();
-    } else if(window.innerWidth <= 600) {
+    } else if(screen.innerWidth <= 600 || window.innerWidth <= 600) {
       var $chartTitle = $('.chart-title'),
           htmlChartTitle = '<span class="chart-title">DigiByte price in USD over the last 5 days</span>';
       $chartTitle.empty().append(htmlChartTitle);
@@ -208,5 +208,3 @@ $(document).ready(function() {
     getPolo();
   }, 60000);
 });
-
-console.log($(window).width);
