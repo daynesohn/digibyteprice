@@ -244,10 +244,15 @@ a:hover {
   }
 
   .footer {
+    font-size: 1.5rem;
     margin: 2rem 0;
     flex-direction: column;
     align-items: center;
     position: relative;
+  }
+
+  .copyright {
+    margin-bottom: 1.75rem;
   }
 }
 
