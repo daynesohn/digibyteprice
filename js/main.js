@@ -1,5 +1,5 @@
-var digiByte = {};
-var response;
+var digiByte = {},
+    response;
 
 //getting current date and date 21 days ago for use in chart.js
 const dateTime = Date.now();
@@ -8,13 +8,13 @@ const startDate = currentDate - 1814400;
 
 digiByte.renderCoin = function(response) {
 
-  var coinRank = response[0].rank;
-  var $showRank = $('#coin-rank');
-  var htmlRank = '<span>' + coinRank + '</span>';
+  var coinRank = response[0].rank,
+      $showRank = $('#coin-rank'),
+      htmlRank = '<span>' + coinRank + '</span>';
 
   //percentage change - adding if/else statement for green if positive, red if negative
-  var percentChange = response[0].percent_change_24h;
-  var $showPerChange = $('#percent-change');
+  var percentChange = response[0].percent_change_24h,
+      $showPerChange = $('#percent-change');
     if (percentChange >= 0) {
     var htmlPerChange = '<span class="green">+' + percentChange + '% in last 24h</span>';
   } else {
@@ -29,20 +29,20 @@ digiByte.renderCoin = function(response) {
 digiByte.renderPolo = function(response) {
 
   //need to convert lowest price on Poloniex from BTC to USD
-  var lowestPrice = (response.BTC_DGB.low24hr) * (response.USDT_BTC.last);
-  var $lowestPrice = $('#low-price');
-  var htmlLowPrice = '<span>$' + lowestPrice.toFixed(6) + '</span>';
+  var lowestPrice = (response.BTC_DGB.low24hr) * (response.USDT_BTC.last),
+      $lowestPrice = $('#low-price'),
+      htmlLowPrice = '<span>$' + lowestPrice.toFixed(6) + '</span>';
 
-  var highestPrice = (response.BTC_DGB.high24hr) * (response.USDT_BTC.last);
-  var $highestPrice = $('#high-price');
-  var htmlHighPrice = '<span>$' + highestPrice.toFixed(6) + '<span>';
+  var highestPrice = (response.BTC_DGB.high24hr) * (response.USDT_BTC.last),
+      $highestPrice = $('#high-price'),
+      htmlHighPrice = '<span>$' + highestPrice.toFixed(6) + '<span>';
 
   $lowestPrice.empty().hide().append(htmlLowPrice).fadeIn(1000);
   $highestPrice.empty().hide().append(htmlHighPrice).fadeIn(1000);
 
-  var currentPrice = (response.BTC_DGB.last) * (response.USDT_BTC.last);
-  var $showPrice = $('#dollar');
-  var htmlPrice = '<span>$' + currentPrice.toFixed(7) + '</span>';
+  var currentPrice = (response.BTC_DGB.last) * (response.USDT_BTC.last),
+      $showPrice = $('#dollar'),
+      htmlPrice = '<span>$' + currentPrice.toFixed(7) + '</span>';
   $showPrice.empty().append(htmlPrice);
 
 }
@@ -81,8 +81,8 @@ function drawLineChart(response) {
       $chartTitle.empty().append(htmlChartTitle);
       results.reverse()
       for (var labelCount=0; labelCount<7; labelCount++) {
-        var calDate = moment.unix(results[labelCount].date);
-        var calDateRead = calDate.format("MMM Do YYYY");
+        var calDate = moment.unix(results[labelCount].date),
+            calDateRead = calDate.format("MMM Do YYYY");
         labels.push(calDateRead);
       } labels.reverse();
       for (var dataCount=0; dataCount<7; dataCount++) {
@@ -96,8 +96,8 @@ function drawLineChart(response) {
       $chartTitle.empty().append(htmlChartTitle);
       results.reverse()
       for (var labelCount=0; labelCount<5; labelCount++) {
-        var calDate = moment.unix(results[labelCount].date);
-        var calDateRead = calDate.format("MMM Do YYYY");
+        var calDate = moment.unix(results[labelCount].date),
+            calDateRead = calDate.format("MMM Do YYYY");
         labels.push(calDateRead);
       } labels.reverse();
       for (var dataCount=0; dataCount<5; dataCount++) {
@@ -107,8 +107,8 @@ function drawLineChart(response) {
       } data.reverse();
     } else {
       for (var labelCount=0; labelCount<21; labelCount++) {
-        var calDate = moment.unix(results[labelCount].date);
-        var calDateRead = calDate.format("MMM Do YYYY");
+        var calDate = moment.unix(results[labelCount].date),
+            calDateRead = calDate.format("MMM Do YYYY");
         labels.push(calDateRead);
       }
       for (var dataCount=0; dataCount<21; dataCount++) {
