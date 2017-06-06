@@ -208,5 +208,3 @@ $(document).ready(function() {
     getPolo();
   }, 60000);
 });
-
-console.log(window.screen.width, window.innerWidth);
