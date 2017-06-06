@@ -75,7 +75,7 @@ function drawLineChart(response) {
             digiClose = results[dataCount].close;
             data.push(((digiOpen + digiClose)/2) * curBitcoin);
       } data.reverse();
-    } else if((screen.innerWidth <= 800 && screen.innerWidth > 600) || (window.innerWidth <= 800 && window.innerWidth > 600) || (window.Width <= 800 && window.Width > 600)) {
+    } else if((screen.innerWidth <= 800 && screen.innerWidth > 600) || (window.innerWidth <= 800 && window.innerWidth > 600) || (window.width <= 800 && window.width > 600)) {
       var $chartTitle = $('.chart-title'),
           htmlChartTitle = '<span class="chart-title">DigiByte price in USD over the last 7 days</span>';
       $chartTitle.empty().append(htmlChartTitle);
