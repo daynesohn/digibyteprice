@@ -28,10 +28,9 @@ function userDigiValue() {
       curBitcoin = poloResult[0].USDT_BTC.last,
       curRate = poloResult[0].BTC_DGB.last,
       calculatedValue = ((curBitcoin * curRate) * numUserDigiBytes).toFixed(7),
-      htmlNumDGB = '<span class="userDGB">' + numUserDigiBytes + '</span>',
+      htmlNumDGB = '<span class="userDGB">' + numberWithCommas(numUserDigiBytes) + '</span>',
       htmlValue = '<span id="dollar">$' + calculatedValue + '</span>';
 
-  console.log(curBitcoin, curRate, calculatedValue, htmlValue);
   $userDGB.replaceWith(htmlNumDGB);
   $userValue.replaceWith(htmlValue);
 }
@@ -108,7 +107,9 @@ digiByte.renderPolo = function(response) {
 
   var currentPrice = (response.BTC_DGB.last) * (response.USDT_BTC.last),
       $showPrice = $('#dollar'),
+      $resetDGB = $('.userDGB'),
       htmlPrice = '<span>$' + currentPrice.toFixed(7) + '</span>';
+  $resetDGB.empty().append('1');
   $showPrice.empty().append(htmlPrice);
 
 }
@@ -231,6 +232,10 @@ function drawLineChart(response) {
     }
     });
   });
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 //get data from coinmarketcap
