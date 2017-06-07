@@ -19,6 +19,19 @@
         <ul class="nav navbar-nav nav-pills links">
           <li><a href="./about.html">About</a></li>
           <li><a href="mailto:dayne@digiprice.io">Contact</a></li>
+          <li class="wrench">
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" id="userTimeSelected" aria-labelledby="dropdownMenu1">
+                <li><a href="#" id="1hr">1 Hour</a></li>
+                <li><a href="#" id="24hr">24 Hours</a></li>
+                <li><a href="#" id="7d">7 days</a></li>
+              </ul>
+            </div>
+          </li>
         </ul>
       </div>
     </nav>
@@ -78,6 +91,7 @@
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="./js/main.js"></script>

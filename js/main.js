@@ -12,17 +12,66 @@ digiByte.renderCoin = function(response) {
       $showRank = $('#coin-rank'),
       htmlRank = '<span>' + coinRank + '</span>';
 
-  //percentage change - adding if/else statement for green if positive, red if negative
-  var percentChange = response[0].percent_change_24h,
-      $showPerChange = $('#percent-change');
-    if (percentChange >= 0) {
-    var htmlPerChange = '<span class="green">+' + percentChange + '% in last 24h</span>';
+  $showRank.empty().hide().append(htmlRank).fadeIn(1000);
+
+}
+
+digiByte.renderPercent = function(response) {
+  var userTimeSelected = '24h',
+      $showPerChange = $('#percent-change'),
+      htmlPerChange = '',
+      percentChange = response[0].percent_change_24h,
+      $1hr = $('#1hr'),
+      $24hr = $('#24hr'),
+      $7d = $('#7d');
+
+  $1hr.on('click', function() {
+    percentChange = response[0].percent_change_1h;
+    userTimeSelected = '1h';
+    console.log(percentChange, userTimeSelected);
+    if(percentChange >= 0) {
+      var htmlPerChange = '<span class="green">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+    } else {
+      var htmlPerChange = '<span class="red">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+    }
+
+    $showPerChange.empty().hide().append(htmlPerChange).fadeIn(1000);
+  })
+
+  $24hr.on('click', function() {
+    percentChange = response[0].percent_change_24h;
+    userTimeSelected = '24h';
+    console.log(percentChange, userTimeSelected);
+    if(percentChange >= 0) {
+      var htmlPerChange = '<span class="green">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+    } else {
+      var htmlPerChange = '<span class="red">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+    }
+
+    $showPerChange.empty().hide().append(htmlPerChange).fadeIn(1000);
+  })
+
+  $7d.on('click', function() {
+    percentChange = response[0].percent_change_7d;
+    userTimeSelected = '7d';
+    console.log(percentChange, userTimeSelected);
+    if(percentChange >= 0) {
+      var htmlPerChange = '<span class="green">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+    } else {
+      var htmlPerChange = '<span class="red">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+    }
+
+    $showPerChange.empty().hide().append(htmlPerChange).fadeIn(1000);
+  })
+
+  //set default to display upon page load
+  if(percentChange >= 0) {
+    var htmlPerChange = '<span class="green">' + percentChange + '% in last 24hr</span>';
   } else {
-    var htmlPerChange = '<span class="red">' + percentChange + '% in last 24h</span>';
-  };
+    var htmlPerChange = '<span class="red">' + percentChange + '% in last 24hr</span>';
+  }
 
   $showPerChange.empty().hide().append(htmlPerChange).fadeIn(1000);
-  $showRank.empty().hide().append(htmlRank).fadeIn(1000);
 
 }
 
@@ -174,6 +223,7 @@ var getCoin = function() {
     dataType: 'json',
     success: function(response) {
       digiByte.renderCoin(response);
+      digiByte.renderPercent(response);
     }
   })
 };
@@ -209,6 +259,3 @@ $(document).ready(function() {
     getPolo();
   }, 60000);
 });
-
-console.log(window.screen.width);
-console.log(window.screen.height);

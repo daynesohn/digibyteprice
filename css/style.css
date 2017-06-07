@@ -64,13 +64,36 @@ a:hover {
   color: #333;
 }
 
-.navbar-nav>li>a:hover {
+.navbar-nav>li>a:hover,
+.btn-default:hover {
   color: #f4d35e;
 }
 
 .nav-pills>li.active>a,
-.nav-pills>li.active>a:hover {
+.nav-pills>li.active>a:hover,
+.open>.dropdown-toggle.btn-default:focus,
+.open>.dropdown-toggle.btn-default:hover {
   background-color: #f4d35e;
+  color: #333;
+}
+
+.btn-default {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: none;
+}
+
+.btn-default:hover {
+  background-color: #eee;
+}
+
+.wrench {
+  margin: auto;
+  color: #f4d35e;
+}
+
+.drop-title {
+  margin: 1.25rem;
   color: #333;
 }
 
