@@ -1,5 +1,10 @@
 var digiByte = {},
-    response;
+    response = '',
+    $1hr = $('#1hr'),
+    $24hr = $('#24hr'),
+    $7d = $('#7d'),
+    $convert = $('.convert'),
+    poloResult= [];
 
 //getting current date and date 21 days ago for use in chart.js
 const dateTime = Date.now();
@@ -14,6 +19,21 @@ digiByte.renderCoin = function(response) {
 
   $showRank.empty().hide().append(htmlRank).fadeIn(1000);
 
+}
+
+function userDigiValue() {
+  var numUserDigiBytes = $('#DGBinput').val(),
+      $userDGB = $('.userDGB'),
+      $userValue = $('#dollar'),
+      curBitcoin = poloResult[0].USDT_BTC.last,
+      curRate = poloResult[0].BTC_DGB.last,
+      calculatedValue = ((curBitcoin * curRate) * numUserDigiBytes).toFixed(7),
+      htmlNumDGB = '<span class="userDGB">' + numUserDigiBytes + '</span>',
+      htmlValue = '<span id="dollar">$' + calculatedValue + '</span>';
+
+  console.log(curBitcoin, curRate, calculatedValue, htmlValue);
+  $userDGB.replaceWith(htmlNumDGB);
+  $userValue.replaceWith(htmlValue);
 }
 
 digiByte.renderPercent = function(response) {
@@ -97,7 +117,7 @@ digiByte.renderPolo = function(response) {
 function drawLineChart(response) {
 
   var curBitcoin = response.USDT_BTC.last;
-
+  //300, 900, 1800, 7200, 14400, 86400
   var jsonData = $.ajax({
     url: 'https://poloniex.com/public?command=returnChartData&currencyPair=BTC_DGB&start=' + startDate + '&end=' + currentDate + '&period=86400',
     dataType: 'json',
@@ -233,13 +253,13 @@ var getPolo = function() {
     success: function(response) {
       digiByte.renderPolo(response);
       drawLineChart(response);
+      poloResult.push(response);
     }
   })
 };
 
 var getViewport = function() {
   if((window.screen.width === 375) && (window.screen.height === 667)) {
-    console.log('success');
     var $chartDiv = $('.chart-replace'),
         htmlChartDiv = '<canvas id="myLineChart"></canvas>';
     $chartDiv.empty().append(htmlChartDiv);
@@ -256,3 +276,5 @@ $(document).ready(function() {
     getPolo();
   }, 60000);
 });
+
+$convert.on('click', userDigiValue)
