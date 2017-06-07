@@ -27,7 +27,7 @@ digiByte.renderPercent = function(response) {
 
   $1hr.on('click', function() {
     percentChange = response[0].percent_change_1h;
-    userTimeSelected = '1h';
+    userTimeSelected = '1hr';
     console.log(percentChange, userTimeSelected);
     if(percentChange >= 0) {
       var htmlPerChange = '<span class="green">' + percentChange + '% in last ' + userTimeSelected + '</span>';
@@ -40,7 +40,7 @@ digiByte.renderPercent = function(response) {
 
   $24hr.on('click', function() {
     percentChange = response[0].percent_change_24h;
-    userTimeSelected = '24h';
+    userTimeSelected = '24hr';
     console.log(percentChange, userTimeSelected);
     if(percentChange >= 0) {
       var htmlPerChange = '<span class="green">' + percentChange + '% in last ' + userTimeSelected + '</span>';

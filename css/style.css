@@ -220,8 +220,28 @@ a:hover {
     margin: 3rem 0 2rem 0;
   }
 
+  #hide-mobile {
+    display: none;
+  }
+
+  .btn-default {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+  }
+
+  .wrench {
+    margin: 0.125rem 0 0 0;
+  }
+
   .hide {
     display: block;
+  }
+
+  .btn-default {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 1.7rem;
   }
 
   .navbar-right {
