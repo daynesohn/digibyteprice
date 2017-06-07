@@ -1,5 +1,10 @@
 var digiByte = {},
-    response;
+    response = '',
+    $1hr = $('#1hr'),
+    $24hr = $('#24hr'),
+    $7d = $('#7d'),
+    $convert = $('.convert'),
+    poloResult= [];
 
 //getting current date and date 21 days ago for use in chart.js
 const dateTime = Date.now();
@@ -12,17 +17,77 @@ digiByte.renderCoin = function(response) {
       $showRank = $('#coin-rank'),
       htmlRank = '<span>' + coinRank + '</span>';
 
-  //percentage change - adding if/else statement for green if positive, red if negative
-  var percentChange = response[0].percent_change_24h,
-      $showPerChange = $('#percent-change');
-    if (percentChange >= 0) {
-    var htmlPerChange = '<span class="green">+' + percentChange + '% in last 24h</span>';
+  $showRank.empty().hide().append(htmlRank).fadeIn(1000);
+
+}
+
+function userDigiValue() {
+  var numUserDigiBytes = $('#DGBinput').val(),
+      $userDGB = $('.userDGB'),
+      $userValue = $('#dollar'),
+      curBitcoin = poloResult[0].USDT_BTC.last,
+      curRate = poloResult[0].BTC_DGB.last,
+      calculatedValue = ((curBitcoin * curRate) * numUserDigiBytes).toFixed(7),
+      htmlNumDGB = '<span class="userDGB">' + numberWithCommas(numUserDigiBytes) + '</span>',
+      htmlValue = '<span id="dollar">$' + calculatedValue + '</span>';
+
+  $userDGB.replaceWith(htmlNumDGB);
+  $userValue.replaceWith(htmlValue);
+}
+
+digiByte.renderPercent = function(response) {
+  var userTimeSelected = '24h',
+      $showPerChange = $('#percent-change'),
+      htmlPerChange = '',
+      percentChange = response[0].percent_change_24h,
+      $1hr = $('#1hr'),
+      $24hr = $('#24hr'),
+      $7d = $('#7d');
+
+  $1hr.on('click', function() {
+    percentChange = response[0].percent_change_1h;
+    userTimeSelected = '1hr';
+    if(percentChange >= 0) {
+      var htmlPerChange = '<span class="green">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+    } else {
+      var htmlPerChange = '<span class="red">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+    }
+
+    $showPerChange.empty().hide().append(htmlPerChange).fadeIn(1000);
+  })
+
+  $24hr.on('click', function() {
+    percentChange = response[0].percent_change_24h;
+    userTimeSelected = '24hr';
+    if(percentChange >= 0) {
+      var htmlPerChange = '<span class="green">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+    } else {
+      var htmlPerChange = '<span class="red">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+    }
+
+    $showPerChange.empty().hide().append(htmlPerChange).fadeIn(1000);
+  })
+
+  $7d.on('click', function() {
+    percentChange = response[0].percent_change_7d;
+    userTimeSelected = '7d';
+    if(percentChange >= 0) {
+      var htmlPerChange = '<span class="green">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+    } else {
+      var htmlPerChange = '<span class="red">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+    }
+
+    $showPerChange.empty().hide().append(htmlPerChange).fadeIn(1000);
+  })
+
+  //set default to display upon page load
+  if(percentChange >= 0) {
+    var htmlPerChange = '<span class="green">' + percentChange + '% in last 24hr</span>';
   } else {
-    var htmlPerChange = '<span class="red">' + percentChange + '% in last 24h</span>';
-  };
+    var htmlPerChange = '<span class="red">' + percentChange + '% in last 24hr</span>';
+  }
 
   $showPerChange.empty().hide().append(htmlPerChange).fadeIn(1000);
-  $showRank.empty().hide().append(htmlRank).fadeIn(1000);
 
 }
 
@@ -42,7 +107,9 @@ digiByte.renderPolo = function(response) {
 
   var currentPrice = (response.BTC_DGB.last) * (response.USDT_BTC.last),
       $showPrice = $('#dollar'),
+      $resetDGB = $('.userDGB'),
       htmlPrice = '<span>$' + currentPrice.toFixed(7) + '</span>';
+  $resetDGB.empty().append('1');
   $showPrice.empty().append(htmlPrice);
 
 }
@@ -51,7 +118,7 @@ digiByte.renderPolo = function(response) {
 function drawLineChart(response) {
 
   var curBitcoin = response.USDT_BTC.last;
-
+  //300, 900, 1800, 7200, 14400, 86400
   var jsonData = $.ajax({
     url: 'https://poloniex.com/public?command=returnChartData&currencyPair=BTC_DGB&start=' + startDate + '&end=' + currentDate + '&period=86400',
     dataType: 'json',
@@ -167,6 +234,10 @@ function drawLineChart(response) {
   });
 }
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 //get data from coinmarketcap
 var getCoin = function() {
   $.ajax({
@@ -174,6 +245,7 @@ var getCoin = function() {
     dataType: 'json',
     success: function(response) {
       digiByte.renderCoin(response);
+      digiByte.renderPercent(response);
     }
   })
 };
@@ -186,13 +258,13 @@ var getPolo = function() {
     success: function(response) {
       digiByte.renderPolo(response);
       drawLineChart(response);
+      poloResult.push(response);
     }
   })
 };
 
 var getViewport = function() {
   if((window.screen.width === 375) && (window.screen.height === 667)) {
-    console.log('success');
     var $chartDiv = $('.chart-replace'),
         htmlChartDiv = '<canvas id="myLineChart"></canvas>';
     $chartDiv.empty().append(htmlChartDiv);
@@ -210,5 +282,4 @@ $(document).ready(function() {
   }, 60000);
 });
 
-console.log(window.screen.width);
-console.log(window.screen.height);
+$convert.on('click', userDigiValue)
