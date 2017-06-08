@@ -88,6 +88,15 @@ a:hover {
   background-color: #eee;
 }
 
+.popover {
+  min-width: 20rem;
+  min-height: 10rem;
+}
+.popover-title,
+.popover-content {
+  color: #333;
+}
+
 .wrench {
   margin: auto;
   color: #f4d35e;

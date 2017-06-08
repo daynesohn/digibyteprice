@@ -278,4 +278,5 @@ $(document).ready(function() {
   }, 60000);
 });
 
+$('#donate').popover();
 $convert.on('click', userDigiValue)
