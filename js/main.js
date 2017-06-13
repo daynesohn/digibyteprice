@@ -279,4 +279,4 @@ $(document).ready(function() {
 });
 
 $('#donate').popover();
-$convert.on('click', userDigiValue)
+$convert.on('click', userDigiValue);
