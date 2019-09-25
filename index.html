@@ -29,10 +29,10 @@
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" id="userTimeSelected" aria-labelledby="dropdownMenu1">
-                <li><a href="#" id="1hr">1 hour</a></li>
-                <li><a href="#" id="24hr">24 hours</a></li>
-                <li><a href="#" id="7d">7 days</a></li>
-                <li role="separator" class="divider"></li>
+                <!--<li><a href="#" id="1hr">1 hour</a></li>-->
+                <!--<li><a href="#" id="24hr">24 hours</a></li>-->
+                <!--<li><a href="#" id="7d">7 days</a></li>-->
+                <!--<li role="separator" class="divider"></li>-->
                 <li><input id="DGBinput" type="number" placeholder="Enter # of DGBs"></input></li>
                 <li><a href="#"><button class="btn btn-default convert">How rich am I?</button></a></li>
               </ul>
@@ -49,13 +49,13 @@
     <div class="container-fluid text-center add-pad">
       <div class="row">
         <div class="row col-md-12 text-center stats clearfix">
-          <div class="stat col-xs-12">
+          <!-- <div class="stat col-xs-12">
             <div class="stat-title">
               <span>Percent Change</span>
             </div>
             <div id="percent-change" class="stat-data">
             </div>
-          </div>
+          </div> -->
           <div class="stat col-xs-12">
             <div class="stat-title">
               <span>Coin Rank</span>
@@ -90,10 +90,10 @@
     </div>
     <div class="footer">
       <div class="copyright col-md-6">
-        <span>&copy;2017 <a href="http://daynesohn.com" target="_blank">Dayne Sohn</a></span>
+        <span>&copy;2017<script>new Date().getFullYear() > 2010 && document.write("-" + new Date().getFullYear());</script>&nbsp;<a href="http://daynesohn.com" target="_blank">Dayne Sohn</a></span>
       </div>
       <div class="api-credit col-md-6">
-        <span>Data from the <a href="https://poloniex.com/exchange#btc_dgb" target="_blank">Poloniex</a> and <a href="https://coinmarketcap.com/" target="_blank">CoinMarketCap</a> APIs</span>
+        <span>Data from the <a href="https://poloniex.com/exchange#btc_dgb" target="_blank">Poloniex</a> and <a href="https://coinranking.com" target="_blank">Coinranking</a> APIs</span>
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

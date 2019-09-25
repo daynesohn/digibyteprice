@@ -1,10 +1,10 @@
 var digiByte = {},
-    response = '',
-    $1hr = $('#1hr'),
-    $24hr = $('#24hr'),
-    $7d = $('#7d'),
-    $convert = $('.convert'),
-    poloResult= [];
+  response = '',
+  $1hr = $('#1hr'),
+  $24hr = $('#24hr'),
+  $7d = $('#7d'),
+  $convert = $('.convert'),
+  poloResult = [];
 
 //getting current date and date 21 days ago for use in chart.js
 const dateTime = Date.now();
@@ -12,238 +12,316 @@ const currentDate = Math.floor(dateTime / 1000);
 const startDate = currentDate - 1814400;
 
 digiByte.renderCoin = function(response) {
-
-  var coinRank = response[0].rank,
-      $showRank = $('#coin-rank'),
-      htmlRank = '<span>' + coinRank + '</span>';
-
-  $showRank.empty().hide().append(htmlRank).fadeIn(1000);
-
-}
+  $showRank = $('#coin-rank');
+  $showRank
+    .empty()
+    .hide()
+    .append(`<span>${response.data.coin.rank}</span>`)
+    .fadeIn(1000);
+};
 
 function userDigiValue() {
   var numUserDigiBytes = $('#DGBinput').val(),
-      $userDGB = $('.userDGB'),
-      $userValue = $('#dollar'),
-      curBitcoin = poloResult[0].USDT_BTC.last,
-      curRate = poloResult[0].BTC_DGB.last,
-      calculatedValue = ((curBitcoin * curRate) * numUserDigiBytes).toFixed(7),
-      htmlNumDGB = '<span class="userDGB">' + numUserDigiBytes + '</span>',
-      htmlValue = '<span id="dollar">$' + calculatedValue + '</span>';
+    $userDGB = $('.userDGB'),
+    $userValue = $('#dollar'),
+    curBitcoin = poloResult[0].USDT_BTC.last,
+    curRate = poloResult[0].BTC_DGB.last,
+    calculatedValue = (curBitcoin * curRate * numUserDigiBytes).toFixed(7),
+    htmlNumDGB = '<span class="userDGB">' + numUserDigiBytes + '</span>',
+    htmlValue = '<span id="dollar">$' + calculatedValue + '</span>';
 
   $userDGB.replaceWith(htmlNumDGB);
   $userValue.replaceWith(htmlValue);
 }
+/*  //! Percent data isn't working due to a deprecated API
+  // TODO - fix this going forward to utilize the percent calculations again
 
 digiByte.renderPercent = function(response) {
   var userTimeSelected = '24h',
-      $showPerChange = $('#percent-change'),
-      htmlPerChange = '',
-      percentChange = response[0].percent_change_24h,
-      $1hr = $('#1hr'),
-      $24hr = $('#24hr'),
-      $7d = $('#7d');
+    $showPerChange = $('#percent-change'),
+    htmlPerChange = '',
+    percentChange = response[0].percent_change_24h,
+    $1hr = $('#1hr'),
+    $24hr = $('#24hr'),
+    $7d = $('#7d');
 
   $1hr.on('click', function() {
     percentChange = response[0].percent_change_1h;
     userTimeSelected = '1hr';
-    if(percentChange >= 0) {
-      var htmlPerChange = '<span class="green">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+    if (percentChange >= 0) {
+      var htmlPerChange =
+        '<span class="green">' +
+        percentChange +
+        '% in last ' +
+        userTimeSelected +
+        '</span>';
     } else {
-      var htmlPerChange = '<span class="red">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+      var htmlPerChange =
+        '<span class="red">' +
+        percentChange +
+        '% in last ' +
+        userTimeSelected +
+        '</span>';
     }
 
-    $showPerChange.empty().hide().append(htmlPerChange).fadeIn(1000);
-  })
+    $showPerChange
+      .empty()
+      .hide()
+      .append(htmlPerChange)
+      .fadeIn(1000);
+  });
 
   $24hr.on('click', function() {
     percentChange = response[0].percent_change_24h;
     userTimeSelected = '24hr';
-    if(percentChange >= 0) {
-      var htmlPerChange = '<span class="green">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+    if (percentChange >= 0) {
+      var htmlPerChange =
+        '<span class="green">' +
+        percentChange +
+        '% in last ' +
+        userTimeSelected +
+        '</span>';
     } else {
-      var htmlPerChange = '<span class="red">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+      var htmlPerChange =
+        '<span class="red">' +
+        percentChange +
+        '% in last ' +
+        userTimeSelected +
+        '</span>';
     }
 
-    $showPerChange.empty().hide().append(htmlPerChange).fadeIn(1000);
-  })
+    $showPerChange
+      .empty()
+      .hide()
+      .append(htmlPerChange)
+      .fadeIn(1000);
+  });
 
   $7d.on('click', function() {
     percentChange = response[0].percent_change_7d;
     userTimeSelected = '7d';
-    if(percentChange >= 0) {
-      var htmlPerChange = '<span class="green">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+    if (percentChange >= 0) {
+      var htmlPerChange =
+        '<span class="green">' +
+        percentChange +
+        '% in last ' +
+        userTimeSelected +
+        '</span>';
     } else {
-      var htmlPerChange = '<span class="red">' + percentChange + '% in last ' + userTimeSelected + '</span>';
+      var htmlPerChange =
+        '<span class="red">' +
+        percentChange +
+        '% in last ' +
+        userTimeSelected +
+        '</span>';
     }
 
-    $showPerChange.empty().hide().append(htmlPerChange).fadeIn(1000);
-  })
+    $showPerChange
+      .empty()
+      .hide()
+      .append(htmlPerChange)
+      .fadeIn(1000);
+  });
 
   //set default to display upon page load
-  if(percentChange >= 0) {
-    var htmlPerChange = '<span class="green">' + percentChange + '% in last 24hr</span>';
+  if (percentChange >= 0) {
+    var htmlPerChange =
+      '<span class="green">' + percentChange + '% in last 24hr</span>';
   } else {
-    var htmlPerChange = '<span class="red">' + percentChange + '% in last 24hr</span>';
+    var htmlPerChange =
+      '<span class="red">' + percentChange + '% in last 24hr</span>';
   }
 
-  $showPerChange.empty().hide().append(htmlPerChange).fadeIn(1000);
+  $showPerChange
+    .empty()
+    .hide()
+    .append(htmlPerChange)
+    .fadeIn(1000);
+};
 
-}
+*/
 
 digiByte.renderPolo = function(response) {
-
   //need to convert lowest price on Poloniex from BTC to USD
-  var lowestPrice = (response.BTC_DGB.low24hr) * (response.USDT_BTC.last),
-      $lowestPrice = $('#low-price'),
-      htmlLowPrice = '<span>$' + lowestPrice.toFixed(6) + '</span>';
+  var lowestPrice = response.BTC_DGB.low24hr * response.USDT_BTC.last,
+    $lowestPrice = $('#low-price'),
+    htmlLowPrice = '<span>$' + lowestPrice.toFixed(6) + '</span>';
 
-  var highestPrice = (response.BTC_DGB.high24hr) * (response.USDT_BTC.last),
-      $highestPrice = $('#high-price'),
-      htmlHighPrice = '<span>$' + highestPrice.toFixed(6) + '<span>';
+  var highestPrice = response.BTC_DGB.high24hr * response.USDT_BTC.last,
+    $highestPrice = $('#high-price'),
+    htmlHighPrice = '<span>$' + highestPrice.toFixed(6) + '<span>';
 
-  $lowestPrice.empty().hide().append(htmlLowPrice).fadeIn(1000);
-  $highestPrice.empty().hide().append(htmlHighPrice).fadeIn(1000);
+  $lowestPrice
+    .empty()
+    .hide()
+    .append(htmlLowPrice)
+    .fadeIn(1000);
+  $highestPrice
+    .empty()
+    .hide()
+    .append(htmlHighPrice)
+    .fadeIn(1000);
 
-  var currentPrice = (response.BTC_DGB.last) * (response.USDT_BTC.last),
-      $showPrice = $('#dollar'),
-      $resetDGB = $('.userDGB'),
-      htmlPrice = '<span>$' + currentPrice.toFixed(7) + '</span>';
+  var currentPrice = response.BTC_DGB.last * response.USDT_BTC.last,
+    $showPrice = $('#dollar'),
+    $resetDGB = $('.userDGB'),
+    htmlPrice = '<span>$' + currentPrice.toFixed(7) + '</span>';
   $resetDGB.empty().append('1');
   $showPrice.empty().append(htmlPrice);
-
-}
+};
 
 //chart.js implementation
 function drawLineChart(response) {
-
   var curBitcoin = response.USDT_BTC.last;
   //300, 900, 1800, 7200, 14400, 86400
   var jsonData = $.ajax({
-    url: 'https://poloniex.com/public?command=returnChartData&currencyPair=BTC_DGB&start=' + startDate + '&end=' + currentDate + '&period=86400',
-    dataType: 'json',
-  }).done(function (results) {
+    url:
+      'https://poloniex.com/public?command=returnChartData&currencyPair=BTC_DGB&start=' +
+      startDate +
+      '&end=' +
+      currentDate +
+      '&period=86400',
+    dataType: 'json'
+  }).done(function(results) {
     // split timestamp and data into separate arrays
-    var labels = [], data=[];
+    var labels = [],
+      data = [];
 
     //if screen size under 900px, show 14 days data
-    if((window.screen.width < 900 && window.screen.width > 800) || (window.innerWidth < 900 && window.innerWidth > 800)) {
+    if (
+      (window.screen.width < 900 && window.screen.width > 800) ||
+      (window.innerWidth < 900 && window.innerWidth > 800)
+    ) {
       var $chartTitle = $('.chart-title'),
-          htmlChartTitle = '<span class="chart-title">DigiByte price in USD over the last 14 days</span>';
+        htmlChartTitle =
+          '<span class="chart-title">DigiByte price in USD over the last 14 days</span>';
       $chartTitle.empty().append(htmlChartTitle);
-      results.reverse()
-      for (var labelCount=0; labelCount<14; labelCount++) {
+      results.reverse();
+      for (var labelCount = 0; labelCount < 14; labelCount++) {
         var calDate = moment.unix(results[labelCount].date);
-        var calDateRead = calDate.format("MMM Do YYYY");
-        labels.push(calDateRead);
-      } labels.reverse();
-      for (var dataCount=0; dataCount<14; dataCount++) {
-        var digiOpen = results[dataCount].open,
-            digiClose = results[dataCount].close;
-            data.push(((digiOpen + digiClose)/2) * curBitcoin);
-      } data.reverse();
-    } else if((window.screen.width <= 800) || (window.innerWidth <=800)) {
-      var $chartTitle = $('.chart-title'),
-          htmlChartTitle = '<span class="chart-title">DigiByte price in USD over the last 7 days</span>';
-      $chartTitle.empty().append(htmlChartTitle);
-      results.reverse()
-      for (var labelCount=0; labelCount<7; labelCount++) {
-        var calDate = moment.unix(results[labelCount].date),
-            calDateRead = calDate.format("MMM Do YYYY");
-        labels.push(calDateRead);
-      } labels.reverse();
-      for (var dataCount=0; dataCount<7; dataCount++) {
-        var digiOpen = results[dataCount].open,
-            digiClose = results[dataCount].close;
-            data.push(((digiOpen + digiClose)/2) * curBitcoin);
-      } data.reverse();
-    } else {
-      for (var labelCount=0; labelCount<21; labelCount++) {
-        var calDate = moment.unix(results[labelCount].date),
-            calDateRead = calDate.format("MMM Do YYYY");
+        var calDateRead = calDate.format('MMM Do YYYY');
         labels.push(calDateRead);
       }
-      for (var dataCount=0; dataCount<21; dataCount++) {
+      labels.reverse();
+      for (var dataCount = 0; dataCount < 14; dataCount++) {
         var digiOpen = results[dataCount].open,
-            digiClose = results[dataCount].close;
-            data.push(((digiOpen + digiClose)/2) * curBitcoin)
+          digiClose = results[dataCount].close;
+        data.push(((digiOpen + digiClose) / 2) * curBitcoin);
+      }
+      data.reverse();
+    } else if (window.screen.width <= 800 || window.innerWidth <= 800) {
+      var $chartTitle = $('.chart-title'),
+        htmlChartTitle =
+          '<span class="chart-title">DigiByte price in USD over the last 7 days</span>';
+      $chartTitle.empty().append(htmlChartTitle);
+      results.reverse();
+      for (var labelCount = 0; labelCount < 7; labelCount++) {
+        var calDate = moment.unix(results[labelCount].date),
+          calDateRead = calDate.format('MMM Do YYYY');
+        labels.push(calDateRead);
+      }
+      labels.reverse();
+      for (var dataCount = 0; dataCount < 7; dataCount++) {
+        var digiOpen = results[dataCount].open,
+          digiClose = results[dataCount].close;
+        data.push(((digiOpen + digiClose) / 2) * curBitcoin);
+      }
+      data.reverse();
+    } else {
+      for (var labelCount = 0; labelCount < 21; labelCount++) {
+        var calDate = moment.unix(results[labelCount].date),
+          calDateRead = calDate.format('MMM Do YYYY');
+        labels.push(calDateRead);
+      }
+      for (var dataCount = 0; dataCount < 21; dataCount++) {
+        var digiOpen = results[dataCount].open,
+          digiClose = results[dataCount].close;
+        data.push(((digiOpen + digiClose) / 2) * curBitcoin);
       }
     }
 
     // Create the chart.js data structure using 'labels' and 'data'
     var tempData = {
-      labels : labels,
-      datasets : [{
-          backgroundColor : "#f4d35e",
+      labels: labels,
+      datasets: [
+        {
+          backgroundColor: '#f4d35e',
           label: 'Average DGB price in USD',
-          strokeColor : "rgba(151,187,205,1)",
-          pointColor : "rgba(151,187,205,1)",
-          pointBackgroundColor : "#99a1aa",
-          pointHighlightFill : "#fff",
-          pointRadius : 6.75,
+          strokeColor: 'rgba(151,187,205,1)',
+          pointColor: 'rgba(151,187,205,1)',
+          pointBackgroundColor: '#99a1aa',
+          pointHighlightFill: '#fff',
+          pointRadius: 6.75,
           pointHoverRadius: 8,
-          data : data
-      }]
+          data: data
+        }
+      ]
     };
 
     // Get the context of the canvas element we want to select
-    var ctx = document.getElementById("myLineChart").getContext("2d");
+    var ctx = document.getElementById('myLineChart').getContext('2d');
 
     // Instantiate a new chart
-    var myNewChart = new Chart(ctx , {
-    type: "line",
-    data: tempData,
-    options : {
-      legend: {
-        labels: {
-          fontColor: 'white'
+    var myNewChart = new Chart(ctx, {
+      type: 'line',
+      data: tempData,
+      options: {
+        legend: {
+          labels: {
+            fontColor: 'white'
+          }
+        },
+        responsive: true,
+        maintainAspectRatio: true,
+        animation: {
+          duration: 1000,
+          easing: 'easeInExpo'
+        },
+        scales: {
+          yAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: 'Price in USD',
+                fontColor: 'white',
+                paddingTop: 20
+              },
+              ticks: {
+                fontColor: 'white',
+                fixedStepSize: 0.01
+              }
+            }
+          ],
+          xAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: 'Date',
+                fontColor: 'white'
+              },
+              ticks: {
+                fontColor: 'white'
+              }
+            }
+          ]
         }
-      },
-      responsive: true,
-      maintainAspectRatio: true,
-      animation: {
-        duration: 1000,
-        easing: 'easeInExpo'
-      },
-      scales: {
-        yAxes: [{
-          scaleLabel: {
-            display: true,
-            labelString: 'Price in USD',
-            fontColor: 'white',
-            paddingTop: 20
-          },
-          ticks: {
-            fontColor: 'white',
-            fixedStepSize: 0.01
-          }
-        }],
-        xAxes: [{
-          scaleLabel: {
-            display: true,
-            labelString: 'Date',
-            fontColor: 'white'
-          },
-          ticks: {
-            fontColor: 'white'
-          }
-        }]
       }
-    }
     });
   });
 }
 
-//get data from coinmarketcap
+//get data from coinranking
 var getCoin = function() {
   $.ajax({
-    url: 'https://api.coinmarketcap.com/v1/ticker/digibyte/?convert=USD',
+    url: 'https://api.coinranking.com/v1/public/coin/30',
     dataType: 'json',
     success: function(response) {
       digiByte.renderCoin(response);
-      digiByte.renderPercent(response);
+      // !Percentage information not available
+      // TODO Fix percentages
+      // digiByte.renderPercent(response);
     }
-  })
+  });
 };
 
 //get data from poloniex
@@ -256,17 +334,17 @@ var getPolo = function() {
       drawLineChart(response);
       poloResult.push(response);
     }
-  })
+  });
 };
 
 var getViewport = function() {
-  if((window.screen.width === 375) && (window.screen.height === 667)) {
+  if (window.screen.width === 375 && window.screen.height === 667) {
     var $chartDiv = $('.chart-replace'),
-        htmlChartDiv = '<canvas id="myLineChart"></canvas>';
+      htmlChartDiv = '<canvas id="myLineChart"></canvas>';
     $chartDiv.empty().append(htmlChartDiv);
   }
   getPolo();
-}
+};
 
 $(document).ready(function() {
   getCoin();
