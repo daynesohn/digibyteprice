@@ -1,15 +1,19 @@
-![DIGIPRICE](http://saldigi.info/m/coins/dgb.png "logo")
+![DIGIPRICE](http://saldigi.info/m/coins/dgb.png 'logo')
+
 # DIGIPRICE
-Recently got into DGB and wanted to make a website to monitor the price in USD easily.
+
+I wanted to make a website to monitor the price of DigiByte in USD easily.
 
 Idea from [ethereumprice.org](ethereumprice.org)
 
 Utilizing two different APIs:
-* [CoinMarketCap](http://cointmarketcap.com)
-* [Poloniex](http://poloniex.com)
+
+- [Coinranking](https://coinranking.com)
+- [Poloniex](https://poloniex.com)
 
 Background image from [thepatternlibrary.com](http://thepatternlibrary.com)
 
-- - -
+---
+
 &nbsp;  
 Enjoy!
